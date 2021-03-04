@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}days that have the second highest temperature{% endblock %}
+{% load tags %}
+{% block content %}
+    <h1>List of days that have the second highest temperature</h1>
+    {% if days %}
+
+    <table class="rwd-table">
+        <tr>
+            <th>Day</th>
+        </tr>
+
+        {% for element in days %}
+            <tr>
+                <td data-th="Day">{{ element  }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>Error</p>
+    {% endif %}
+{% endblock %}
+
+
