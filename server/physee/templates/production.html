@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}production{% endblock %}
+{% load tags %}
+{% block content %}
+    <h1>List of Production Data</h1>
+    {% if production %}
+    {"harvest_date":"2020-05-01T07:13:00Z","weight_in_ton":200,"number of plants":300,"name":"Sweet cherry tomato"}
+    <table class="rwd-table">
+        <tr>
+            <th>Harvest Date</th>
+            <th>Weight In Ton</th>
+            <th>Number Of Plants</th>
+            <th>Name</th>
+        </tr>
+
+        {% for element in production %}
+            <tr>
+                <td data-th="Harvest Date">{{ element.harvest_date }}</td>
+                <td data-th="Weight In Ton">{{ element.weight_in_ton }}</td>
+                <td data-th="Number Of Plants">{% dict_key_lookup element "number of plants"  %}</td>
+                <td data-th="Name">{% dict_key_lookup element "name"  %}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>Error</p>
+    {% endif %}
+{% endblock %}
+
+

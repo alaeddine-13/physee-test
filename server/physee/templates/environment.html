@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}environment{% endblock %}
+{% load tags %}
+{% block content %}
+    <h1>List of Environment Data</h1>
+    {% if environment %}
+    <table class="rwd-table">
+        <tr>
+            <th>ID</th>
+            <th>Sensor ID</th>
+            <th>time</th>
+            <th>temperature</th>
+            <th>light intensity</th>
+            <th>relative humidity</th>
+        </tr>
+
+        {% for element in environment %}
+            <tr>
+                <td data-th="ID">{{ element.id }}</td>
+                <td data-th="Sensor ID">{{ element.sensor_id_id }}</td>
+                <td data-th="time">{{ element.time }}</td>
+                <td data-th="temperature">{{ element.data.temperature }}</td>
+                <td data-th="light intensity">{% dict_key_lookup element.data "light intensity"  %}</td>
+                <td data-th="relative humidity">{% dict_key_lookup element.data "relative humidity"  %}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>Error</p>
+    {% endif %}
+{% endblock %}
+
+
