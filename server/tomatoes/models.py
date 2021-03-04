@@ -4,12 +4,13 @@ import uuid
 
 class TomatoPlant(models.Model):
     name = models.CharField(max_length=30)
+    number_of_plants = models.IntegerField()
+    harvest_per_year = models.IntegerField()
 
 
 class Production(models.Model):
     tomato_plant = models.ForeignKey(TomatoPlant, on_delete=models.CASCADE)
     harvest_date  = models.DateTimeField()
-    number_of_plants = models.IntegerField()
     weight_in_ton = models.IntegerField()
 
 

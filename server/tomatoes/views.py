@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from rest_framework.views import APIView
 from .models import (
     TomatoPlant,
     Production,
@@ -34,3 +36,19 @@ class SensorDataCreateListView(generics.ListCreateAPIView):
 class SensorDataView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SensorDataSerializer
     queryset = SensorData.objects.all()
+
+class EnvironmentView(APIView):
+    queryset = SensorData.objects.filter(target='environment')
+    renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
+
+    def get(self, request, *args, **kwargs):
+        return Response(self.queryset.all(), template_name='environment.html')
+
+
+class SoilView(APIView):
+    queryset = SensorData.objects.filter(target='soil')
+    renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
+
+    def get(self, request, *args, **kwargs):
+        return Response(self.queryset.all(), template_name='soil.html')
+
