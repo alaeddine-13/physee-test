@@ -14,6 +14,8 @@ from .serializers import (
     SensorDataSerializer,
 )
 
+from operator import itemgetter
+
 class TomatoPlantCreateListView(generics.ListCreateAPIView):
     serializer_class = TomatoPlantSerializer
     queryset = TomatoPlant.objects.all()
@@ -68,4 +70,29 @@ class SoilView(APIView):
 
     def get(self, request, *args, **kwargs):
         return Response({"soil": self.queryset.all().values()}, template_name='soil.html')
+
+
+class DaysView(APIView):
+    renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
+
+    def get(self, request, *args, **kwargs):
+        results = []
+        values = SensorData.objects.filter(target="environment").values()
+        
+        temperatures = list(set(map(
+            lambda element: element.get('data', {}).get('temperature', 0),
+            values
+        )))
+        temperatures = sorted(temperatures, reverse=True)
+        if len(temperatures) < 2:
+            results = []
+        else:
+            print(temperatures[1])
+            results = list(set(map(lambda item: item["time"].date(), filter(
+                lambda item: item.get("data", {}).get('temperature') == temperatures[1],
+                values
+            ))))
+
+
+        return Response({'days': results}, template_name='days.html')
 

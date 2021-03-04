@@ -28,6 +28,7 @@ from tomatoes.views import (
     SoilView,
     TomatoesPlantView,
     ProductionsView,
+    DaysView,
 )
 
 
@@ -52,6 +53,7 @@ urlpatterns = [
     path('soil', SoilView.as_view(), name='soil'),
     path('tomatoes', TomatoesPlantView.as_view(), name='tomatoes'),
     path('production', ProductionsView.as_view(), name='productions'),
+    path('days', DaysView.as_view(), name='days'),
 
     path('openapi', get_schema_view(
         title="Taxim taxis API",
