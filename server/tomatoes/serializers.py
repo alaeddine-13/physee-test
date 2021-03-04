@@ -11,6 +11,9 @@ class TimestampToDateTimeField(serializers.DateTimeField):
         return value.strftime("%s000")
 
 class TomatoPlantSerializer(serializers.ModelSerializer):
+    harvest_per_year = serializers.IntegerField()
+    number_of_plants = serializers.IntegerField()
+    environment_condition = serializers.JSONField()
     class Meta:
         model = TomatoPlant
         fields = '__all__'
@@ -19,6 +22,7 @@ class ProductionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Production
         fields = '__all__'
+    harvest_date = TimestampToDateTimeField(help_text="timestamp value")
 
 class SensorDataSerializer(serializers.ModelSerializer):
     class Meta:

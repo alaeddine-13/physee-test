@@ -4,8 +4,10 @@ import uuid
 
 class TomatoPlant(models.Model):
     name = models.CharField(max_length=30)
-    number_of_plants = models.IntegerField()
-    harvest_per_year = models.IntegerField()
+    number_of_plants = models.IntegerField(default=None, blank=True, null=True)
+    harvest_per_year = models.IntegerField(default=None, blank=True, null=True)
+    environment_condition = models.JSONField(default=None, blank=True, null=True)
+    soil_condition = models.JSONField(default=None, blank=True, null=True)
 
 
 class Production(models.Model):

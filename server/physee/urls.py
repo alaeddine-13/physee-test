@@ -24,6 +24,10 @@ from tomatoes.views import (
     ProductionCreateListView,
     SensorDataView,
     SensorDataCreateListView,
+    EnvironmentView,
+    SoilView,
+    TomatoesPlantView,
+    ProductionsView,
 )
 
 
@@ -36,15 +40,18 @@ urlpatterns = [
         extra_context={'schema_url':'openapi-schema'}
     ), name='swagger-ui'),
 
-    path('api/tomatoes/<int:pk>', TomatoPlantView.as_view(), name='tomatoes'),
-    path('api/tomatoes',TomatoPlantCreateListView.as_view(), name='tomatoes-create-list'),
+    path('api/tomatoes/<int:pk>', TomatoPlantView.as_view(), name='tomato'),
+    path('api/tomatoes',TomatoPlantCreateListView.as_view(), name='tomato-create-list'),
 
     path('api/production/<int:pk>', ProductionView.as_view(), name='production'),
     path('api/production',ProductionCreateListView.as_view(), name='production-create-list'),
 
     path('api/sensor/<int:pk>', SensorDataView.as_view(), name='sensor'),
     path('api/sensor',SensorDataCreateListView.as_view(), name='sensor-create-list'),
-
+    path('environment', EnvironmentView.as_view(), name='environment'),
+    path('soil', SoilView.as_view(), name='soil'),
+    path('tomatoes', TomatoesPlantView.as_view(), name='tomatoes'),
+    path('production', ProductionsView.as_view(), name='productions'),
 
     path('openapi', get_schema_view(
         title="Taxim taxis API",
