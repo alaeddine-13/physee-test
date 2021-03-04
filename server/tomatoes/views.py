@@ -84,6 +84,7 @@ class SoilView(APIView):
     renderer_classes = [TemplateHTMLRenderer, JSONRenderer]
 
     def get(self, request, *args, **kwargs):
+        print( self.queryset.all().values())
         return Response({"soil": self.queryset.all().values()}, template_name='soil.html')
 
 

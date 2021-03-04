@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}tomatoes{% endblock %}
+{% load tags %}
+{% block content %}
+    <h1>List of Tomatoes Data</h1>
+    {% if tomatoes %}
+
+    <table class="rwd-table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Number Of Plants</th>
+            <th>Harvest Per Year</th>
+        </tr>
+
+        {% for element in tomatoes %}
+            <tr>
+                <td data-th="ID">{{ element.id  }}</td>
+                <td data-th="Name">{{ element.name  }}</td>
+                <td data-th="Number Of Plants">{{ element.number_of_plants  }}</td>
+                <td data-th="Harvest Per Year">{{ element.harvest_per_year  }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>Error</p>
+    {% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}soil{% endblock %}
+{% load tags %}
+{% block content %}
+    <h1>List of Soil Data</h1>
+    {% if soil %}
+    <table class="rwd-table">
+        <tr>
+            <th>ID</th>
+            <th>Sensor ID</th>
+            <th>time</th>
+            <th>moisture</th>
+            <th>pH</th>
+        </tr>
+
+        {% for element in soil %}
+            <tr>
+                <td data-th="ID">{{ element.id }}</td>
+                <td data-th="Sensor ID">{{ element.sensor_id_id }}</td>
+                <td data-th="time">{{ element.time }}</td>
+                <td data-th="temperature">{{ element.data.moisture }}</td>
+                <td data-th="light intensity">{{ element.data.pH }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>Error</p>
+    {% endif %}
+{% endblock %}
+
+
